@@ -20,7 +20,7 @@ cart.get('/', (req, res)=>{
     if (req.query.pageSize){
         let limited = [...filtered];
         while (limited.length > req.query.pageSize) {
-            limited.splice(limited.length, 1);
+            limited.splice(limited.length - 1, 1);
         }
         res.json(limited);
         res.status(200);
