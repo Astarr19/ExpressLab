@@ -44,11 +44,10 @@ cart.get('/:id', (req, res)=>{
 cart.post('/', (req,res)=>{
     console.log(req.body);
     let item = {
-        id: myCart.length + 1,
-        product: req.body.product,
-        price: req.body.price,
-        quantity: req.body.quantity
+        ...req.body,
+        id: myCart.length + 1
     };
+
     myCart.push(item);
     res.json(item);
     res.status(201);
@@ -57,10 +56,8 @@ cart.post('/', (req,res)=>{
 cart.put('/:id', (req,res)=>{
     if(req.params.id <= myCart.length && req.params.id > 0){
         let item = {
+            ...req.body,
             id: parseInt(req.params.id),
-            product: req.body.product,
-            price: req.body.price,
-            quantity: req.body.quantity
         };
         myCart.splice((req.params.id-1),1,item);
         res.json(item);
